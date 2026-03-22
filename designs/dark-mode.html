@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Fernandez | Dark Mode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-deep: #050505;
+            --bg: #0a0a0a;
+            --surface: #121212;
+            --surface-light: #1a1a1a;
+            --border: #2a2a2a;
+            --accent: #22c55e;
+            --accent-glow: rgba(34, 197, 94, 0.2);
+            --accent-warm: #f59e0b;
+            --text: #ffffff;
+            --text-muted: #6b7280;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 32px;
+            left: 32px;
+            z-index: 100;
+            width: 48px;
+            height: 48px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .back-link svg { stroke: var(--text); width: 20px; height: 20px; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 197, 94, 0.06) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: conic-gradient(from 180deg, transparent, var(--accent), transparent 30%);
+            opacity: 0.04;
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 40px;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.2s forwards;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero-badge-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 10vw, 100px);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.4s forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: var(--accent);
+            color: var(--bg);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.8s forwards;
+        }
+
+        .hero-cta:hover {
+            box-shadow: 0 0 40px var(--accent-glow), 0 10px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Section */
+        .section {
+            padding: 120px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 48px;
+        }
+
+        /* Story */
+        .story-section {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .story-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .story-text {
+            font-size: 17px;
+            line-height: 1.9;
+            color: var(--text-muted);
+        }
+
+        .story-text strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .story-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+        }
+
+        .story-card-quote {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .story-card-author {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Timeline */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .timeline-grid { grid-template-columns: 1fr; }
+        }
+
+        .timeline-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .timeline-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Metrics */
+        .metrics-section {
+            background: var(--bg-deep);
+            padding: 120px 40px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .metric-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 30px var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* Beyond */
+        .beyond-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .beyond-grid { grid-template-columns: 1fr; }
+        }
+
+        .beyond-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .beyond-card:hover {
+            border-color: var(--accent-warm);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.15);
+        }
+
+        .beyond-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .beyond-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .beyond-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .contact-text {
+            font-size: 17px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 14px 28px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-deep);
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .section { padding: 80px 24px; }
+            .story-section { padding: 80px 24px; }
+            .metrics-section { padding: 80px 24px; }
+            .contact-section { padding: 80px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="gallery.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </a>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span class="hero-badge-text">Staff Engineer @ Tesla</span>
+            </div>
+            <h1 class="hero-title">Fernando <span>Fernandez</span></h1>
+            <p class="hero-subtitle">From automotive technician to software engineer. Building diagnostic automation systems that save millions.</p>
+            <a href="#story" class="hero-cta">Explore My Journey</a>
+        </div>
+    </section>
+
+    <section id="story" class="story-section">
+        <div class="section">
+            <p class="section-label">// ORIGIN</p>
+            <h2 class="section-title">The Transformation</h2>
+            <div class="story-grid">
+                <div class="story-text">
+                    I spent years as an automotive technician, diagnosing problems by <strong>sound and instinct</strong>. Every engine told a story. I taught myself Python through YouTube tutorials after work.
+                    <br><br>
+                    That curiosity led me from the shop floor to Staff Product Support Engineer at Tesla, where I now build the diagnostic automation systems that help technicians work smarter.
+                </div>
+                <div class="story-card">
+                    <p class="story-card-quote">"At the technician level, your impact stays within your assigned region. At the service engineering level, you affect every vehicle."</p>
+                    <p class="story-card-author">- The driving principle</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <p class="section-label">// EXPERIENCE</p>
+        <h2 class="section-title">Career Path</h2>
+        <div class="timeline-grid">
+            <div class="timeline-card">
+                <p class="timeline-year">2024 - Present</p>
+                <h3 class="timeline-title">Staff Engineer</h3>
+                <p class="timeline-desc">Leading diagnostic automation. 4 subsystem autodiags in production. Driving conversion from visual to Python-based diagnostics.</p>
+            </div>
+            <div class="timeline-card">
+                <p class="timeline-year">2020 - 2024</p>
+                <h3 class="timeline-title">Senior Engineer</h3>
+                <p class="timeline-desc">Discovered Autodiag. Self-taught Python through Udemy and YouTube. Traveled to service centers.</p>
+            </div>
+            <div class="timeline-card">
+                <p class="timeline-year">2016 - 2020</p>
+                <h3 class="timeline-title">Field Specialist</h3>
+                <p class="timeline-desc">Mobile service across Texas. Remote diagnostics and telemetry analysis expertise.</p>
+            </div>
+            <div class="timeline-card">
+                <p class="timeline-year">2011 - 2016</p>
+                <h3 class="timeline-title">Master Technician</h3>
+                <p class="timeline-desc">All 8 ASE certifications. Electrical diagnostics specialist at Jaguar dealerships.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="metrics-section">
+        <div class="section" style="padding: 0; text-align: center;">
+            <p class="section-label">// IMPACT</p>
+            <h2 class="section-title">By The Numbers</h2>
+        </div>
+        <div class="metrics-grid" style="margin-top: 48px;">
+            <div class="metric-card">
+                <p class="metric-value">$12.8M</p>
+                <p class="metric-label">Savings</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-value">38%</p>
+                <p class="metric-label">Time Reduced</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-value">7,500+</p>
+                <p class="metric-label">Automations</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-value">84%</p>
+                <p class="metric-label">ML Accuracy</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <p class="section-label">// LIFE</p>
+        <h2 class="section-title">Beyond The Code</h2>
+        <div class="beyond-grid">
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127830;</div>
+                <h3 class="beyond-title">Pitmaster</h3>
+                <p class="beyond-desc">2x Brisket Competition Winner. Texas traditional with mesquite. Low and slow.</p>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127939;</div>
+                <h3 class="beyond-title">Marathon Runner</h3>
+                <p class="beyond-desc">First marathon: 4:29:46. Training through San Antonio greenways.</p>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127793;</div>
+                <h3 class="beyond-title">Future Rancher</h3>
+                <p class="beyond-desc">Planning a Hill Country ranch. River access, legacy for generations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <p class="section-label">// CONNECT</p>
+        <h2 class="contact-title">Let's Talk</h2>
+        <p class="contact-text">Open to conversations about engineering, career transitions, or the art of slow-smoked brisket.</p>
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/fernando-fernandez-8744786b/" class="contact-link" target="_blank">LinkedIn</a>
+            <a href="https://github.com/fernando-fernandez3" class="contact-link" target="_blank">GitHub</a>
+            <a href="https://x.com/Fdfdz90" class="contact-link" target="_blank">X / Twitter</a>
+            <a href="mailto:fernando.fernandez90@outlook.com" class="contact-link">Email</a>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">fernando@texas:~$ echo "2025"</p>
+    </footer>
+</body>
+</html>

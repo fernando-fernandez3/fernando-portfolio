@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Fernandez | Japandi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --sand: #e8e0d4;
+            --sand-light: #f5f0e8;
+            --sage: #8b9a7d;
+            --sage-muted: #a8b59e;
+            --charcoal: #2c2c2c;
+            --charcoal-light: #4a4a4a;
+            --cream: #faf8f5;
+            --terracotta: #c4a27c;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--sand-light);
+            color: var(--charcoal);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 32px;
+            left: 32px;
+            z-index: 100;
+            width: 48px;
+            height: 48px;
+            background: var(--cream);
+            border: 1px solid var(--sand);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .back-link:hover {
+            background: var(--sage);
+            border-color: var(--sage);
+        }
+
+        .back-link:hover svg { stroke: var(--cream); }
+        .back-link svg { stroke: var(--charcoal); width: 20px; height: 20px; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+            position: relative;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--sand-light) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--sage-muted) 0%, transparent 70%);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-kanji {
+            font-size: 14px;
+            letter-spacing: 0.3em;
+            color: var(--sage);
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(48px, 10vw, 120px);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: slideUp 1.2s ease 0.5s forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-role {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--charcoal-light);
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease 0.9s forwards;
+        }
+
+        .hero-divider {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(180deg, var(--sage), transparent);
+            margin: 0 auto 40px;
+            opacity: 0;
+            animation: growDown 1s ease 1.2s forwards;
+        }
+
+        @keyframes growDown {
+            from { opacity: 0; height: 0; }
+            to { opacity: 1; height: 80px; }
+        }
+
+        .hero-philosophy {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-style: italic;
+            color: var(--charcoal-light);
+            max-width: 500px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeIn 1.2s ease 1.5s forwards;
+        }
+
+        /* Section */
+        .section {
+            padding: 120px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 400;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        /* Story */
+        .story-section {
+            background: var(--cream);
+            padding: 120px 40px;
+        }
+
+        .story-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .story-text {
+            font-size: 18px;
+            line-height: 2;
+            color: var(--charcoal-light);
+        }
+
+        .story-text strong {
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        .story-highlight {
+            display: block;
+            margin: 48px 0;
+            padding: 32px 0;
+            border-top: 1px solid var(--sand);
+            border-bottom: 1px solid var(--sand);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-style: italic;
+            color: var(--sage);
+            text-align: center;
+        }
+
+        /* Journey */
+        .journey-section {
+            background: var(--charcoal);
+            color: var(--sand-light);
+            padding: 120px 40px;
+        }
+
+        .journey-section .section-label { color: var(--sage-muted); }
+        .journey-section .section-title { color: var(--cream); }
+
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 60px auto 0;
+        }
+
+        .journey-item {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.5s ease;
+        }
+
+        .journey-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-4px);
+        }
+
+        .journey-year {
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            color: var(--sage-muted);
+            margin-bottom: 16px;
+        }
+
+        .journey-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--cream);
+        }
+
+        .journey-desc {
+            font-size: 15px;
+            color: var(--sand);
+            line-height: 1.7;
+        }
+
+        /* Metrics */
+        .metrics-section {
+            padding: 120px 40px;
+            background: var(--sand-light);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            max-width: 900px;
+            margin: 60px auto 0;
+            text-align: center;
+        }
+
+        .metric-item {
+            padding: 32px;
+        }
+
+        .metric-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 400;
+            color: var(--sage);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--charcoal-light);
+        }
+
+        /* Beyond */
+        .beyond-section {
+            background: var(--cream);
+            padding: 120px 40px;
+        }
+
+        .beyond-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--sand);
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+
+        @media (max-width: 768px) {
+            .beyond-grid { grid-template-columns: 1fr; }
+        }
+
+        .beyond-item {
+            background: var(--cream);
+            padding: 48px 32px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .beyond-item:hover {
+            background: var(--sand-light);
+        }
+
+        .beyond-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .beyond-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .beyond-desc {
+            font-size: 14px;
+            color: var(--charcoal-light);
+            line-height: 1.6;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .contact-section .section-title {
+            color: var(--cream);
+            margin-bottom: 24px;
+        }
+
+        .contact-text {
+            font-size: 18px;
+            color: var(--sand);
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 16px 32px;
+            border: 1px solid var(--sage-muted);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--sage);
+            border-color: var(--sage);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: var(--charcoal-light);
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px 80px; }
+            .section { padding: 80px 24px; }
+            .story-section { padding: 80px 24px; }
+            .journey-section { padding: 80px 24px; }
+            .metrics-section { padding: 80px 24px; }
+            .beyond-section { padding: 80px 24px; }
+            .contact-section { padding: 80px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="gallery.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </a>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-kanji">SIMPLICITY IN PURPOSE</p>
+            <h1 class="hero-name">Fernando Fernandez</h1>
+            <p class="hero-role">Staff Product Support Engineer at Tesla</p>
+            <div class="hero-divider"></div>
+            <p class="hero-philosophy">"From wrench to code, building systems that scale from one vehicle to millions."</p>
+        </div>
+    </section>
+
+    <section class="story-section">
+        <div class="story-content">
+            <p class="section-label">The Journey</p>
+            <h2 class="section-title">From Hands to Systems</h2>
+            <p class="story-text">
+                I spent years as an automotive technician, diagnosing problems by <strong>sound and instinct</strong>. Every engine told a story. I taught myself Python through YouTube tutorials after work. That curiosity led me from the shop floor to Staff Product Support Engineer at Tesla, where I now build the diagnostic automation systems that help technicians work smarter.
+            </p>
+            <span class="story-highlight">
+                The same patterns I analyzed manually can now be encoded into code that serves millions of vehicles.
+            </span>
+            <p class="story-text">
+                At the technician level, your impact stays within your assigned region. At the service engineering level, you affect every vehicle. That shift in scale is what drives me.
+            </p>
+        </div>
+    </section>
+
+    <section class="journey-section">
+        <div class="section" style="padding-top: 0; padding-bottom: 0;">
+            <p class="section-label">Path</p>
+            <h2 class="section-title">Considered Steps</h2>
+        </div>
+        <div class="journey-grid">
+            <div class="journey-item">
+                <p class="journey-year">2024 - Present</p>
+                <h3 class="journey-title">Staff Engineer</h3>
+                <p class="journey-desc">Leading diagnostic automation. Built 4 subsystem autodiags in production. Driving the conversion from visual to Python-based diagnostics.</p>
+            </div>
+            <div class="journey-item">
+                <p class="journey-year">2020 - 2024</p>
+                <h3 class="journey-title">Senior Engineer</h3>
+                <p class="journey-desc">Discovered Autodiag and taught myself Python. Traveled to service centers to support critical tasks and reduce backlog.</p>
+            </div>
+            <div class="journey-item">
+                <p class="journey-year">2016 - 2020</p>
+                <h3 class="journey-title">Field Technical Specialist</h3>
+                <p class="journey-desc">Mobile service across Texas. Learned the critical importance of remote diagnostics and telemetry analysis.</p>
+            </div>
+            <div class="journey-item">
+                <p class="journey-year">2011 - 2016</p>
+                <h3 class="journey-title">ASE Master Technician</h3>
+                <p class="journey-desc">Passed all 8 ASE tests. Specialized in electrical diagnostics and complex system troubleshooting.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="metrics-section">
+        <div class="section" style="padding-top: 0; padding-bottom: 0; text-align: center;">
+            <p class="section-label">Impact</p>
+            <h2 class="section-title">Measured Results</h2>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <p class="metric-value">$12.8M</p>
+                <p class="metric-label">Documented Savings</p>
+            </div>
+            <div class="metric-item">
+                <p class="metric-value">38%</p>
+                <p class="metric-label">Time Reduction</p>
+            </div>
+            <div class="metric-item">
+                <p class="metric-value">7,500+</p>
+                <p class="metric-label">Automations</p>
+            </div>
+            <div class="metric-item">
+                <p class="metric-value">84%</p>
+                <p class="metric-label">ML Accuracy</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="beyond-section">
+        <div class="section" style="padding-top: 0; padding-bottom: 0; text-align: center;">
+            <p class="section-label">Balance</p>
+            <h2 class="section-title">Beyond the Code</h2>
+        </div>
+        <div class="beyond-grid">
+            <div class="beyond-item">
+                <div class="beyond-icon">&#127830;</div>
+                <h3 class="beyond-title">Low & Slow</h3>
+                <p class="beyond-desc">2x Brisket Competition Winner. Mesquite wood, salt and pepper, Texas traditional.</p>
+            </div>
+            <div class="beyond-item">
+                <div class="beyond-icon">&#127939;</div>
+                <h3 class="beyond-title">26.2 Miles</h3>
+                <p class="beyond-desc">First marathon: 4:29:46. Training through San Antonio greenways. No music, full attention.</p>
+            </div>
+            <div class="beyond-item">
+                <div class="beyond-icon">&#127793;</div>
+                <h3 class="beyond-title">Hill Country</h3>
+                <p class="beyond-desc">Planning a family ranch. Rolling hills, Guadalupe River access, legacy for generations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <p class="section-label">Connect</p>
+        <h2 class="section-title">Let's Talk</h2>
+        <p class="contact-text">Open to conversations about engineering, career transitions, or the perfect brisket.</p>
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/fernando-fernandez-8744786b/" class="contact-link" target="_blank">LinkedIn</a>
+            <a href="https://github.com/fernando-fernandez3" class="contact-link" target="_blank">GitHub</a>
+            <a href="mailto:fernando.fernandez90@outlook.com" class="contact-link">Email</a>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">Fernando Fernandez &middot; Texas</p>
+    </footer>
+</body>
+</html>

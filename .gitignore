@@ -1,0 +1,21 @@
+# Claude Code session state (personal)
+.claude/
+
+# Backups
+index-backup.html
+
+# Full-res headshot (11MB, use headshot-web.jpg instead)
+headshot.jpg
+
+# Temporary files
+tmp/
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~

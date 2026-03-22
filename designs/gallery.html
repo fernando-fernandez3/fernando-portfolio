@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Fernandez | Design Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --border: #262626;
+            --text: #fafafa;
+            --text-muted: #737373;
+            --accent: #d97706;
+            --accent-muted: rgba(217, 119, 6, 0.15);
+        }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--accent-muted);
+            border: 1px solid rgba(217, 119, 6, 0.3);
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 32px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-preview {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-content {
+            padding: 28px;
+        }
+
+        .card-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Preview backgrounds for each style */
+        .preview-japandi { background: linear-gradient(145deg, #f5f0e8 0%, #e8e0d4 50%, #8b9a7d 100%); }
+        .preview-art-deco { background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #d4af37 100%); }
+        .preview-kinetic { background: linear-gradient(145deg, #0f0f0f 0%, #1a1a1a 50%, #ff6b6b 100%); }
+        .preview-swiss { background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 50%, #e60012 100%); }
+        .preview-dark-mode { background: linear-gradient(145deg, #0d0d0d 0%, #1a1a1a 50%, #00d9ff 100%); }
+        .preview-organic { background: linear-gradient(145deg, #fef6e4 0%, #f3d2c1 50%, #8bd3dd 100%); }
+        .preview-typography { background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 50%, #ffffff 100%); }
+        .preview-retro-futuristic { background: linear-gradient(145deg, #2d1b4e 0%, #1a0f2e 50%, #ff00ff 100%); }
+        .preview-scandinavian { background: linear-gradient(145deg, #f9f7f4 0%, #e8e4df 50%, #b8a99a 100%); }
+        .preview-neo-geo { background: linear-gradient(145deg, #0a0a0a 0%, #1f1f1f 50%, #00ff88 100%); }
+        .preview-glassmorphism { background: linear-gradient(145deg, #1a0f0a 0%, #3d1c0a 50%, #7c3415 100%); }
+        .preview-metropolitan { background: linear-gradient(145deg, #2c2c2c 0%, #1a1a1a 50%, #c9a962 100%); }
+        .preview-bauhaus { background: linear-gradient(145deg, #f5f5f5 0%, #ffffff 50%, #e60012 100%); }
+        .preview-luxury { background: linear-gradient(145deg, #0a0a0a 0%, #141414 50%, #c9a962 100%); }
+        .preview-gradient { background: linear-gradient(135deg, #1a1612 0%, #3d1c0a 50%, #d4872a 100%); }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 40px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 40px 20px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Original Designs
+        </a>
+
+        <header>
+            <div class="badge">15 New Designs</div>
+            <h1>Design Style Gallery</h1>
+            <p class="subtitle">Exploring different design aesthetics for Fernando's personal brand portfolio. Each design captures a unique mood and visual language.</p>
+        </header>
+
+        <div class="grid">
+            <a href="japandi.html" class="card">
+                <div class="card-preview preview-japandi"></div>
+                <div class="card-content">
+                    <div class="card-number">01</div>
+                    <h2 class="card-title">Japandi</h2>
+                    <p class="card-description">Japanese zen meets Scandinavian warmth. Calm intentionality with purposeful negative space.</p>
+                    <div class="card-tags">
+                        <span class="tag">Minimal</span>
+                        <span class="tag">Zen</span>
+                        <span class="tag">Warm</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="art-deco.html" class="card">
+                <div class="card-preview preview-art-deco"></div>
+                <div class="card-content">
+                    <div class="card-number">02</div>
+                    <h2 class="card-title">Art Deco</h2>
+                    <p class="card-description">Glamorous confidence of the 1920s. Bold geometry, gold accents, and elegant excess.</p>
+                    <div class="card-tags">
+                        <span class="tag">Luxurious</span>
+                        <span class="tag">Bold</span>
+                        <span class="tag">Geometric</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="kinetic.html" class="card">
+                <div class="card-preview preview-kinetic"></div>
+                <div class="card-content">
+                    <div class="card-number">03</div>
+                    <h2 class="card-title">Kinetic</h2>
+                    <p class="card-description">Motion as the primary language. Choreographed animations with musical timing.</p>
+                    <div class="card-tags">
+                        <span class="tag">Animated</span>
+                        <span class="tag">Dynamic</span>
+                        <span class="tag">Rhythmic</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="swiss.html" class="card">
+                <div class="card-preview preview-swiss"></div>
+                <div class="card-content">
+                    <div class="card-number">04</div>
+                    <h2 class="card-title">Swiss/International</h2>
+                    <p class="card-description">Mathematical precision creates clarity. Grid-based, systematic, and ultra-clean.</p>
+                    <div class="card-tags">
+                        <span class="tag">Grid</span>
+                        <span class="tag">Clean</span>
+                        <span class="tag">Precise</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="dark-mode.html" class="card">
+                <div class="card-preview preview-dark-mode"></div>
+                <div class="card-content">
+                    <div class="card-number">05</div>
+                    <h2 class="card-title">Dark Mode First</h2>
+                    <p class="card-description">Designed for dark interfaces from the ground up. Light as precious resource, high contrast elegance.</p>
+                    <div class="card-tags">
+                        <span class="tag">Dark</span>
+                        <span class="tag">Premium</span>
+                        <span class="tag">Focused</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="organic.html" class="card">
+                <div class="card-preview preview-organic"></div>
+                <div class="card-content">
+                    <div class="card-number">06</div>
+                    <h2 class="card-title">Organic/Fluid</h2>
+                    <p class="card-description">Flowing shapes and natural curves. Sophisticated blob forms that feel grown, not constructed.</p>
+                    <div class="card-tags">
+                        <span class="tag">Curved</span>
+                        <span class="tag">Natural</span>
+                        <span class="tag">Soft</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="typography.html" class="card">
+                <div class="card-preview preview-typography"></div>
+                <div class="card-content">
+                    <div class="card-number">07</div>
+                    <h2 class="card-title">Typography First</h2>
+                    <p class="card-description">Type as the hero. Letterforms as architecture, words that occupy space like sculpture.</p>
+                    <div class="card-tags">
+                        <span class="tag">Bold Type</span>
+                        <span class="tag">Editorial</span>
+                        <span class="tag">Impactful</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="retro-futuristic.html" class="card">
+                <div class="card-preview preview-retro-futuristic"></div>
+                <div class="card-content">
+                    <div class="card-number">08</div>
+                    <h2 class="card-title">Retro-Futuristic</h2>
+                    <p class="card-description">80s vision of tomorrow. Chrome dreams, neon horizons, and optimistic futurism.</p>
+                    <div class="card-tags">
+                        <span class="tag">Neon</span>
+                        <span class="tag">Synthwave</span>
+                        <span class="tag">Nostalgic</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="scandinavian.html" class="card">
+                <div class="card-preview preview-scandinavian"></div>
+                <div class="card-content">
+                    <div class="card-number">09</div>
+                    <h2 class="card-title">Scandinavian</h2>
+                    <p class="card-description">Warm minimalism and hygge comfort. Simplicity that creates space for living.</p>
+                    <div class="card-tags">
+                        <span class="tag">Cozy</span>
+                        <span class="tag">Light</span>
+                        <span class="tag">Hygge</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="neo-geo.html" class="card">
+                <div class="card-preview preview-neo-geo"></div>
+                <div class="card-content">
+                    <div class="card-number">10</div>
+                    <h2 class="card-title">Neo-Geo</h2>
+                    <p class="card-description">Mathematical beauty through geometric patterns. Shapes create rhythm and sophisticated texture.</p>
+                    <div class="card-tags">
+                        <span class="tag">Geometric</span>
+                        <span class="tag">Patterns</span>
+                        <span class="tag">Bold</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="glassmorphism.html" class="card">
+                <div class="card-preview preview-glassmorphism"></div>
+                <div class="card-content">
+                    <div class="card-number">11</div>
+                    <h2 class="card-title">Glassmorphism</h2>
+                    <p class="card-description">Translucent layers and blurred backgrounds. Sophisticated depth through frosted glass surfaces.</p>
+                    <div class="card-tags">
+                        <span class="tag">Translucent</span>
+                        <span class="tag">Layered</span>
+                        <span class="tag">Modern</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="metropolitan.html" class="card">
+                <div class="card-preview preview-metropolitan"></div>
+                <div class="card-content">
+                    <div class="card-number">12</div>
+                    <h2 class="card-title">Metropolitan</h2>
+                    <p class="card-description">Urban sophistication and cultural density. The electric charge of global cities.</p>
+                    <div class="card-tags">
+                        <span class="tag">Urban</span>
+                        <span class="tag">Cultural</span>
+                        <span class="tag">Refined</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="bauhaus.html" class="card">
+                <div class="card-preview preview-bauhaus"></div>
+                <div class="card-content">
+                    <div class="card-number">13</div>
+                    <h2 class="card-title">Bauhaus</h2>
+                    <p class="card-description">Form follows function. Primary shapes and colors create impact through pure geometric logic.</p>
+                    <div class="card-tags">
+                        <span class="tag">Primary</span>
+                        <span class="tag">Functional</span>
+                        <span class="tag">Classic</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="luxury-minimal.html" class="card">
+                <div class="card-preview preview-luxury"></div>
+                <div class="card-content">
+                    <div class="card-number">14</div>
+                    <h2 class="card-title">Luxury Minimal</h2>
+                    <p class="card-description">Premium restraint. Luxury through what's absent, quality that whispers rather than shouts.</p>
+                    <div class="card-tags">
+                        <span class="tag">Premium</span>
+                        <span class="tag">Restrained</span>
+                        <span class="tag">Elegant</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="gradient-modern.html" class="card">
+                <div class="card-preview preview-gradient"></div>
+                <div class="card-content">
+                    <div class="card-number">15</div>
+                    <h2 class="card-title">Gradient Modern</h2>
+                    <p class="card-description">Sophisticated color transitions as primary visual language. Depth through chromatic journeys.</p>
+                    <div class="card-tags">
+                        <span class="tag">Colorful</span>
+                        <span class="tag">Vibrant</span>
+                        <span class="tag">Flowing</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

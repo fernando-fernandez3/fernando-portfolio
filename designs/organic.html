@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Fernandez | Organic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream: #fef6e4;
+            --blush: #f3d2c1;
+            --teal: #8bd3dd;
+            --teal-dark: #5fa8b3;
+            --terracotta: #d98f6a;
+            --charcoal: #2d3436;
+            --sage: #b5c9a8;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 32px;
+            left: 32px;
+            z-index: 100;
+            width: 52px;
+            height: 52px;
+            background: var(--cream);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .back-link:hover {
+            background: var(--teal);
+            transform: scale(1.1);
+        }
+
+        .back-link svg { stroke: var(--charcoal); width: 20px; height: 20px; }
+
+        /* Organic shapes */
+        .blob {
+            position: absolute;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 15s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 60% 40% 60% / 40% 50% 60% 50%; }
+            75% { border-radius: 40% 60% 60% 40% / 60% 40% 50% 60%; }
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 80px 40px;
+        }
+
+        .hero-blob-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--blush);
+            top: -100px;
+            right: -100px;
+            opacity: 0.6;
+            animation-delay: 0s;
+        }
+
+        .hero-blob-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--teal);
+            bottom: -80px;
+            left: -80px;
+            opacity: 0.5;
+            animation-delay: -5s;
+        }
+
+        .hero-blob-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--sage);
+            top: 50%;
+            left: 20%;
+            opacity: 0.4;
+            animation-delay: -10s;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 12px 28px;
+            background: white;
+            border-radius: 100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--teal-dark);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: floatIn 1s ease 0.2s forwards;
+        }
+
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(48px, 10vw, 100px);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: floatIn 1s ease 0.4s forwards;
+        }
+
+        .hero-title span {
+            color: var(--terracotta);
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: rgba(45, 52, 54, 0.7);
+            max-width: 500px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: floatIn 1s ease 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: var(--charcoal);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: floatIn 1s ease 0.8s forwards;
+        }
+
+        .hero-cta:hover {
+            background: var(--teal-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(139, 211, 221, 0.3);
+        }
+
+        /* Section */
+        .section {
+            padding: 120px 40px;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--teal-dark);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        /* Story */
+        .story-section {
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--blush) 0%, var(--cream) 100%);
+            border-radius: 0 0 0 200px;
+        }
+
+        .story-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .story-grid { grid-template-columns: 1fr; gap: 40px; }
+            .story-section::before { display: none; }
+        }
+
+        .story-text {
+            font-size: 18px;
+            line-height: 1.9;
+            color: rgba(45, 52, 54, 0.8);
+        }
+
+        .story-text strong {
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        .story-card {
+            background: var(--cream);
+            padding: 48px;
+            border-radius: 40px;
+            position: relative;
+        }
+
+        .story-card-quote {
+            font-family: 'DM Serif Display', serif;
+            font-size: 26px;
+            line-height: 1.5;
+            color: var(--charcoal);
+        }
+
+        /* Journey */
+        .journey-section {
+            background: var(--cream);
+        }
+
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .journey-grid { grid-template-columns: 1fr; }
+        }
+
+        .journey-card {
+            background: white;
+            padding: 40px;
+            border-radius: 32px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--sage));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .journey-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .journey-year {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--teal-dark);
+            margin-bottom: 12px;
+        }
+
+        .journey-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .journey-desc {
+            font-size: 15px;
+            color: rgba(45, 52, 54, 0.7);
+            line-height: 1.7;
+        }
+
+        /* Metrics */
+        .metrics-section {
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metrics-blob {
+            width: 600px;
+            height: 600px;
+            background: var(--teal);
+            opacity: 0.1;
+            top: -200px;
+            right: -200px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--cream);
+            border-radius: 32px;
+            transition: all 0.4s ease;
+        }
+
+        .metric-card:hover {
+            transform: scale(1.05);
+        }
+
+        .metric-value {
+            font-family: 'DM Serif Display', serif;
+            font-size: 48px;
+            color: var(--terracotta);
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(45, 52, 54, 0.6);
+        }
+
+        /* Beyond */
+        .beyond-section {
+            background: linear-gradient(180deg, var(--cream) 0%, white 100%);
+        }
+
+        .beyond-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .beyond-grid { grid-template-columns: 1fr; }
+        }
+
+        .beyond-card {
+            background: white;
+            padding: 48px 32px;
+            border-radius: 32px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s ease;
+        }
+
+        .beyond-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .beyond-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .beyond-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .beyond-desc {
+            font-size: 15px;
+            color: rgba(45, 52, 54, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--charcoal);
+            color: white;
+            padding: 120px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-blob {
+            width: 400px;
+            height: 400px;
+            background: var(--teal-dark);
+            opacity: 0.2;
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(36px, 6vw, 56px);
+            margin-bottom: 20px;
+        }
+
+        .contact-text {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 16px 32px;
+            background: white;
+            color: var(--charcoal);
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.4s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--teal);
+            transform: translateY(-4px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px 80px; }
+            .section { padding: 80px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="gallery.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </a>
+
+    <section class="hero">
+        <div class="blob hero-blob-1"></div>
+        <div class="blob hero-blob-2"></div>
+        <div class="blob hero-blob-3"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">Staff Engineer at Tesla</div>
+            <h1 class="hero-title">Fernando <span>Fernandez</span></h1>
+            <p class="hero-subtitle">From automotive technician to software engineer. Building systems that scale from one vehicle to millions.</p>
+            <a href="#story" class="hero-cta">Discover My Journey</a>
+        </div>
+    </section>
+
+    <section id="story" class="story-section section">
+        <div class="story-content">
+            <p class="section-label">The Story</p>
+            <h2 class="section-title">From Wrench to Code</h2>
+            <div class="story-grid">
+                <div class="story-text">
+                    I spent years as an automotive technician, diagnosing problems by <strong>sound and instinct</strong>. Every engine told a story. I taught myself Python through YouTube tutorials after work.
+                    <br><br>
+                    That curiosity led me from the shop floor to Staff Product Support Engineer at Tesla, where I now build the diagnostic automation systems that help technicians work smarter.
+                </div>
+                <div class="story-card">
+                    <p class="story-card-quote">"At the technician level, your impact stays within your assigned region. At the service engineering level, you affect every vehicle."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="journey-section section">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <p class="section-label">Experience</p>
+            <h2 class="section-title">The Journey</h2>
+        </div>
+        <div class="journey-grid">
+            <div class="journey-card">
+                <p class="journey-year">2024 - Present</p>
+                <h3 class="journey-title">Staff Engineer</h3>
+                <p class="journey-desc">Leading diagnostic automation. 4 subsystem autodiags in production. Driving conversion from visual to Python-based diagnostics.</p>
+            </div>
+            <div class="journey-card">
+                <p class="journey-year">2020 - 2024</p>
+                <h3 class="journey-title">Senior Engineer</h3>
+                <p class="journey-desc">Discovered Autodiag. Self-taught Python. Traveled to service centers supporting critical tasks.</p>
+            </div>
+            <div class="journey-card">
+                <p class="journey-year">2016 - 2020</p>
+                <h3 class="journey-title">Field Specialist</h3>
+                <p class="journey-desc">Mobile service across Texas. Learned remote diagnostics and telemetry analysis.</p>
+            </div>
+            <div class="journey-card">
+                <p class="journey-year">2011 - 2016</p>
+                <h3 class="journey-title">Master Technician</h3>
+                <p class="journey-desc">All 8 ASE certifications. Electrical diagnostics specialist at Jaguar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="metrics-section section">
+        <div class="blob metrics-blob"></div>
+        <div style="max-width: 1100px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+            <p class="section-label">Impact</p>
+            <h2 class="section-title">By The Numbers</h2>
+        </div>
+        <div class="metrics-grid" style="margin-top: 48px;">
+            <div class="metric-card">
+                <p class="metric-value">$12.8M</p>
+                <p class="metric-label">Savings</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-value">38%</p>
+                <p class="metric-label">Time Reduced</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-value">7,500+</p>
+                <p class="metric-label">Automations</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-value">84%</p>
+                <p class="metric-label">ML Accuracy</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="beyond-section section">
+        <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
+            <p class="section-label">Life</p>
+            <h2 class="section-title">Beyond The Code</h2>
+        </div>
+        <div class="beyond-grid" style="margin-top: 48px;">
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127830;</div>
+                <h3 class="beyond-title">Pitmaster</h3>
+                <p class="beyond-desc">2x Brisket Competition Winner. Texas traditional with mesquite. Low and slow.</p>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127939;</div>
+                <h3 class="beyond-title">Marathon Runner</h3>
+                <p class="beyond-desc">First marathon: 4:29:46. Training through San Antonio greenways.</p>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127793;</div>
+                <h3 class="beyond-title">Future Rancher</h3>
+                <p class="beyond-desc">Planning a Hill Country ranch. River access, legacy for generations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="blob contact-blob"></div>
+        <div class="contact-content">
+            <h2 class="contact-title">Let's Connect</h2>
+            <p class="contact-text">Open to conversations about engineering, career transitions, or the perfect brisket.</p>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/fernando-fernandez-8744786b/" class="contact-link" target="_blank">LinkedIn</a>
+                <a href="https://github.com/fernando-fernandez3" class="contact-link" target="_blank">GitHub</a>
+                <a href="mailto:fernando.fernandez90@outlook.com" class="contact-link">Email</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">Fernando Fernandez &middot; Texas &middot; 2025</p>
+    </footer>
+</body>
+</html>

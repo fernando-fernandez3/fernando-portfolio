@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Fernandez | Bauhaus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --white: #f5f5f5;
+            --black: #1a1a1a;
+            --red: #e60012;
+            --yellow: #f7d21e;
+            --blue: #0066b3;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 32px;
+            left: 32px;
+            z-index: 100;
+            width: 48px;
+            height: 48px;
+            background: var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: var(--black);
+            transform: scale(1.1);
+        }
+
+        .back-link svg { stroke: var(--white); width: 20px; height: 20px; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+            background: var(--white);
+        }
+
+        @media (max-width: 900px) {
+            .hero-content { padding: 120px 40px 60px; }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 0.2s forwards;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .hero-badge-shape {
+            width: 12px;
+            height: 12px;
+            background: var(--red);
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: slideUp 0.6s ease 0.4s forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: #666;
+            max-width: 400px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 0.8s forwards;
+        }
+
+        .hero-cta:hover {
+            background: var(--blue);
+        }
+
+        .hero-shapes {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shape-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-shapes { min-height: 400px; }
+            .shape-container { width: 300px; height: 300px; }
+        }
+
+        .shape-circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--red);
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-square {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--yellow);
+            bottom: 0;
+            right: 0;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .shape-triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 173px solid var(--blue);
+            bottom: 50px;
+            left: 50px;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
+        }
+
+        /* Section */
+        .section {
+            padding: 120px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .section { padding: 80px 40px; }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .section-shape {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .section-shape--circle {
+            background: var(--red);
+            border-radius: 50%;
+        }
+
+        .section-shape--square {
+            background: var(--yellow);
+        }
+
+        .section-shape--triangle {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 35px solid var(--blue);
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* Story */
+        .story-section {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .story-section .section-title { color: var(--white); }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        @media (max-width: 900px) {
+            .story-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .story-text {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #ccc;
+        }
+
+        .story-text strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .story-quote {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--yellow);
+        }
+
+        /* Timeline */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        @media (max-width: 1000px) {
+            .timeline-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .timeline-grid { grid-template-columns: 1fr; }
+        }
+
+        .timeline-item {
+            padding: 40px;
+            border: 2px solid var(--black);
+            margin: -1px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: var(--yellow);
+        }
+
+        .timeline-year {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 16px;
+        }
+
+        .timeline-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .timeline-desc {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline-item:hover .timeline-desc { color: var(--black); }
+
+        /* Metrics */
+        .metrics-section {
+            background: var(--blue);
+            color: var(--white);
+            padding: 120px 80px;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-section { padding: 80px 40px; }
+        }
+
+        .metrics-section .section-title { color: var(--white); }
+        .metrics-section .section-shape--square { background: var(--white); }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+        }
+
+        @media (max-width: 900px) {
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+        }
+
+        /* Beyond */
+        .beyond-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        @media (max-width: 768px) {
+            .beyond-grid { grid-template-columns: 1fr; }
+        }
+
+        .beyond-item {
+            padding: 60px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .beyond-item:nth-child(1) { background: var(--red); color: var(--white); }
+        .beyond-item:nth-child(2) { background: var(--yellow); }
+        .beyond-item:nth-child(3) { background: var(--blue); color: var(--white); }
+
+        .beyond-item:hover {
+            transform: scale(1.02);
+        }
+
+        .beyond-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .beyond-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .beyond-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--black);
+            color: var(--white);
+            padding: 120px 80px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .contact-section { padding: 80px 40px; }
+        }
+
+        .contact-title {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .contact-text {
+            font-size: 18px;
+            color: #999;
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 16px 32px;
+            background: var(--white);
+            color: var(--black);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:nth-child(1):hover { background: var(--red); color: var(--white); }
+        .contact-link:nth-child(2):hover { background: var(--yellow); }
+        .contact-link:nth-child(3):hover { background: var(--blue); color: var(--white); }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            padding: 40px 80px;
+            border-top: 2px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            footer { flex-direction: column; gap: 16px; padding: 40px; }
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .footer-shapes {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-shape {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer-shape--circle { background: var(--red); border-radius: 50%; }
+        .footer-shape--square { background: var(--yellow); }
+        .footer-shape--triangle {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 14px solid var(--blue);
+        }
+    </style>
+</head>
+<body>
+    <a href="gallery.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </a>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-shape"></span>
+                Staff Engineer at Tesla
+            </div>
+            <h1 class="hero-title">Fernando Fernandez</h1>
+            <p class="hero-subtitle">From automotive technician to software engineer. Building systems that scale to millions.</p>
+            <a href="#story" class="hero-cta">Explore</a>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape-container">
+                <div class="shape-circle"></div>
+                <div class="shape-triangle"></div>
+                <div class="shape-square"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story" class="story-section section">
+        <div class="section-header">
+            <div class="section-shape section-shape--circle"></div>
+            <h2 class="section-title">The Story</h2>
+        </div>
+        <div class="story-grid">
+            <div class="story-text">
+                I spent years as an automotive technician, diagnosing problems by <strong>sound and instinct</strong>. Every engine told a story.
+                <br><br>
+                I taught myself Python through YouTube tutorials after work. That curiosity led me from the shop floor to Staff Product Support Engineer at Tesla.
+            </div>
+            <div class="story-quote">
+                "At the technician level, your impact stays within your assigned region. At the service engineering level, you affect every vehicle."
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <div class="section-shape section-shape--square"></div>
+            <h2 class="section-title">Experience</h2>
+        </div>
+        <div class="timeline-grid">
+            <div class="timeline-item">
+                <p class="timeline-year">2024</p>
+                <h3 class="timeline-title">Staff Engineer</h3>
+                <p class="timeline-desc">Leading diagnostic automation. 4 subsystem autodiags in production.</p>
+            </div>
+            <div class="timeline-item">
+                <p class="timeline-year">2020</p>
+                <h3 class="timeline-title">Senior Engineer</h3>
+                <p class="timeline-desc">Discovered Autodiag. Self-taught Python through online resources.</p>
+            </div>
+            <div class="timeline-item">
+                <p class="timeline-year">2016</p>
+                <h3 class="timeline-title">Field Specialist</h3>
+                <p class="timeline-desc">Mobile service across Texas. Remote diagnostics expertise.</p>
+            </div>
+            <div class="timeline-item">
+                <p class="timeline-year">2011</p>
+                <h3 class="timeline-title">Master Technician</h3>
+                <p class="timeline-desc">All 8 ASE certifications. Electrical diagnostics specialist.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="metrics-section">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header">
+                <div class="section-shape section-shape--square"></div>
+                <h2 class="section-title">Impact</h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <p class="metric-value">$12.8M</p>
+                    <p class="metric-label">Savings</p>
+                </div>
+                <div class="metric-item">
+                    <p class="metric-value">38%</p>
+                    <p class="metric-label">Time Saved</p>
+                </div>
+                <div class="metric-item">
+                    <p class="metric-value">7,500+</p>
+                    <p class="metric-label">Automations</p>
+                </div>
+                <div class="metric-item">
+                    <p class="metric-value">84%</p>
+                    <p class="metric-label">ML Accuracy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 0;">
+        <div class="beyond-grid">
+            <div class="beyond-item">
+                <div class="beyond-icon">&#127830;</div>
+                <h3 class="beyond-title">BBQ</h3>
+                <p class="beyond-desc">2x Brisket Competition Winner. Texas traditional with mesquite.</p>
+            </div>
+            <div class="beyond-item">
+                <div class="beyond-icon">&#127939;</div>
+                <h3 class="beyond-title">Marathon</h3>
+                <p class="beyond-desc">First marathon: 4:29:46. Training through San Antonio greenways.</p>
+            </div>
+            <div class="beyond-item">
+                <div class="beyond-icon">&#127793;</div>
+                <h3 class="beyond-title">Ranch</h3>
+                <p class="beyond-desc">Planning a Hill Country property. River access, legacy building.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <h2 class="contact-title">Connect</h2>
+        <p class="contact-text">Open to conversations about engineering, career transitions, or the perfect brisket.</p>
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/fernando-fernandez-8744786b/" class="contact-link" target="_blank">LinkedIn</a>
+            <a href="https://github.com/fernando-fernandez3" class="contact-link" target="_blank">GitHub</a>
+            <a href="mailto:fernando.fernandez90@outlook.com" class="contact-link">Email</a>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">Fernando Fernandez &middot; Texas &middot; 2025</p>
+        <div class="footer-shapes">
+            <div class="footer-shape footer-shape--circle"></div>
+            <div class="footer-shape footer-shape--square"></div>
+            <div class="footer-shape footer-shape--triangle"></div>
+        </div>
+    </footer>
+</body>
+</html>

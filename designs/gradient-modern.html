@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Fernandez | Gradient Modern</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --earth-dark: #1a1612;
+            --earth-mid: #2a2420;
+            --rust: #c4501c;
+            --amber: #d4872a;
+            --wheat: #e8c87a;
+            --sage: #7a9178;
+            --cream: #f5efe6;
+            --cream-muted: rgba(245, 239, 230, 0.7);
+            --cream-subtle: rgba(245, 239, 230, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 400;
+            background: var(--earth-dark);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Gradient mesh background - warm earth tones */
+        .gradient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(196, 80, 28, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 80% 20%, rgba(212, 135, 42, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 60% at 60% 80%, rgba(122, 145, 120, 0.08) 0%, transparent 50%),
+                var(--earth-dark);
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero - asymmetric layout */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            padding-left: 8%;
+        }
+
+        .hero-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--wheat) 60%, var(--amber) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--cream-muted);
+            max-width: 480px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .hero-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--cream-subtle);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .hero-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--rust), var(--amber));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-link:hover {
+            color: var(--cream);
+        }
+
+        .hero-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            border-left: 1px solid rgba(245, 239, 230, 0.1);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .hero-stat {
+            position: relative;
+        }
+
+        .hero-stat-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat:nth-child(1) .hero-stat-value {
+            color: var(--rust);
+        }
+
+        .hero-stat:nth-child(2) .hero-stat-value {
+            color: var(--amber);
+        }
+
+        .hero-stat:nth-child(3) .hero-stat-value {
+            color: var(--wheat);
+        }
+
+        .hero-stat:nth-child(4) .hero-stat-value {
+            color: var(--sage);
+        }
+
+        .hero-stat-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            color: var(--cream-subtle);
+            text-transform: uppercase;
+        }
+
+        /* Section base */
+        .section {
+            padding: 6rem 8%;
+            border-top: 1px solid rgba(245, 239, 230, 0.08);
+        }
+
+        .section-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: baseline;
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--rust);
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--cream-subtle);
+        }
+
+        /* About - horizontal scroll feel */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .about-headline {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .about-headline span {
+            background: linear-gradient(90deg, var(--rust), var(--amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text {
+            columns: 2;
+            column-gap: 3rem;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            color: var(--cream-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Timeline - vertical line with dots */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--rust), var(--amber), var(--wheat), var(--sage));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--earth-dark);
+            border: 2px solid var(--amber);
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .timeline-year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--amber);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-company {
+            font-size: 0.85rem;
+            color: var(--cream-subtle);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--cream-muted);
+            line-height: 1.7;
+            max-width: 500px;
+        }
+
+        /* Projects - stacked cards with gradient borders */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: linear-gradient(to bottom, var(--rust), var(--amber), var(--wheat));
+        }
+
+        .project {
+            background: var(--earth-dark);
+            padding: 2rem 2.5rem;
+            display: grid;
+            grid-template-columns: 60px 1fr 180px;
+            gap: 2rem;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .project:hover {
+            background: var(--earth-mid);
+        }
+
+        .project-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--cream-subtle);
+        }
+
+        .project-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .project-info p {
+            font-size: 0.9rem;
+            color: var(--cream-muted);
+        }
+
+        .project-metric {
+            text-align: right;
+        }
+
+        .project-metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--wheat);
+        }
+
+        .project-metric-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--cream-subtle);
+            text-transform: uppercase;
+        }
+
+        /* Personal - three column minimal */
+        .personal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: rgba(245, 239, 230, 0.1);
+        }
+
+        .personal-item {
+            background: var(--earth-dark);
+            padding: 3rem 2rem;
+        }
+
+        .personal-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .personal-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .personal-highlight {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--amber);
+            margin-bottom: 0.75rem;
+        }
+
+        .personal-desc {
+            font-size: 0.85rem;
+            color: var(--cream-muted);
+            line-height: 1.6;
+        }
+
+        /* Contact - minimal */
+        .contact-section {
+            text-align: center;
+            padding: 8rem 8%;
+        }
+
+        .contact-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1rem;
+            color: var(--cream-muted);
+            margin-bottom: 3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .contact-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--cream-subtle);
+            text-decoration: none;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--amber);
+            border-color: var(--amber);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 8%;
+            border-top: 1px solid rgba(245, 239, 230, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--cream-subtle);
+        }
+
+        .back-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--amber);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--wheat);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                padding: 6rem 6% 3rem;
+            }
+
+            .hero-right {
+                border-left: none;
+                border-top: 1px solid rgba(245, 239, 230, 0.1);
+                padding: 3rem 6% 6rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-text {
+                columns: 1;
+            }
+
+            .project {
+                grid-template-columns: 40px 1fr;
+                gap: 1rem;
+            }
+
+            .project-metric {
+                grid-column: 2;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .personal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-mesh"></div>
+
+    <div class="page">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-left">
+                <div class="hero-eyebrow">Staff Engineer · Tesla</div>
+                <h1 class="hero-title">Fernando Fernandez</h1>
+                <p class="hero-desc">
+                    From automotive technician to software engineer. Building diagnostic
+                    automation systems that have generated $12.8M in documented savings.
+                </p>
+                <div class="hero-links">
+                    <a href="#about" class="hero-link">About</a>
+                    <a href="#work" class="hero-link">Work</a>
+                    <a href="#contact" class="hero-link">Contact</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">$12.8M</div>
+                        <div class="hero-stat-label">Savings</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">38%</div>
+                        <div class="hero-stat-label">Time Reduced</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">7,500+</div>
+                        <div class="hero-stat-label">Automations</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">84%</div>
+                        <div class="hero-stat-label">ML Accuracy</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="section" id="about">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">About</h2>
+            </div>
+            <div class="about-content">
+                <h3 class="about-headline">Self-taught engineer with <span>11+ years</span> hands-on experience</h3>
+                <div class="about-text">
+                    <p>
+                        I started my career as an automotive technician, diagnosing engine problems
+                        by sound and instinct. Every engine told a story. I taught myself Python
+                        through YouTube tutorials after work.
+                    </p>
+                    <p>
+                        That curiosity led me from the shop floor to Staff Product Support Engineer
+                        at Tesla, where I now build the diagnostic automation systems that help
+                        technicians work smarter.
+                    </p>
+                    <p>
+                        Based in Texas, I bring a unique perspective—hands-on problem solving,
+                        slow-smoked brisket on weekends, and the grit to run 26.2 miles.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Career</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2024 — Present</div>
+                    <div class="timeline-title">Staff Product Support Engineer</div>
+                    <div class="timeline-company">Tesla · Service Engineering</div>
+                    <p class="timeline-desc">
+                        Leading diagnostic automation initiatives. Built 4 subsystem autodiags
+                        still in production. Driving the conversion from visual to Python-based diagnostics.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020 — 2024</div>
+                    <div class="timeline-title">Senior Product Support Engineer</div>
+                    <div class="timeline-company">Tesla · Tactical Response Team</div>
+                    <p class="timeline-desc">
+                        Traveled to service centers and the factory to support critical tasks.
+                        Discovered Autodiag and taught myself Python to contribute.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2016 — 2020</div>
+                    <div class="timeline-title">Field Technical Specialist</div>
+                    <div class="timeline-company">Tesla · Mobile Service</div>
+                    <p class="timeline-desc">
+                        Traveled to customers' homes and ranches. Learned the critical importance
+                        of remote diagnostics and telemetry-based problem solving.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2011 — 2016</div>
+                    <div class="timeline-title">ASE Master Technician</div>
+                    <div class="timeline-company">Jaguar Dealerships</div>
+                    <p class="timeline-desc">
+                        Passed all 8 ASE tests. Specialized in electrical diagnostics and
+                        complex system troubleshooting across Pasadena and San Antonio.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section" id="work">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Work</h2>
+            </div>
+            <div class="projects-list">
+                <div class="project">
+                    <span class="project-num">01</span>
+                    <div class="project-info">
+                        <h3>Service Analytics Dashboard</h3>
+                        <p>ETL pipeline processing 30K+ daily events. Primary tool for 105+ stakeholders.</p>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">$12.8M</div>
+                        <div class="project-metric-label">Savings</div>
+                    </div>
+                </div>
+                <div class="project">
+                    <span class="project-num">02</span>
+                    <div class="project-info">
+                        <h3>High Confidence Automation</h3>
+                        <p>Real-time Kafka consumer with eligibility logic for automated corrections.</p>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">38%</div>
+                        <div class="project-metric-label">Time Reduced</div>
+                    </div>
+                </div>
+                <div class="project">
+                    <span class="project-num">03</span>
+                    <div class="project-info">
+                        <h3>ML Classification System</h3>
+                        <p>Sentence transformer for multilingual narrative classification.</p>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">84%+</div>
+                        <div class="project-metric-label">Accuracy</div>
+                    </div>
+                </div>
+                <div class="project">
+                    <span class="project-num">04</span>
+                    <div class="project-info">
+                        <h3>Diagnostic Externalization</h3>
+                        <p>Right-to-repair diagnostic tools. 9/18 networks shipped externally.</p>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">500+</div>
+                        <div class="project-metric-label">Executions</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Beyond Work</h2>
+            </div>
+            <div class="personal-grid">
+                <div class="personal-item">
+                    <div class="personal-icon">🔥</div>
+                    <h3 class="personal-title">BBQ</h3>
+                    <div class="personal-highlight">2x Competition Winner</div>
+                    <p class="personal-desc">
+                        Expertise in offset smoking. Organized the "Meat Assassins Brisket Cook-Off."
+                    </p>
+                </div>
+                <div class="personal-item">
+                    <div class="personal-icon">🏃</div>
+                    <h3 class="personal-title">Marathon</h3>
+                    <div class="personal-highlight">4:29:46 PR</div>
+                    <p class="personal-desc">
+                        Training for future races with ambitious time goals. Same persistence that drives my code.
+                    </p>
+                </div>
+                <div class="personal-item">
+                    <div class="personal-icon">🤠</div>
+                    <h3 class="personal-title">Texas</h3>
+                    <div class="personal-highlight">Hill Country Vision</div>
+                    <p class="personal-desc">
+                        Based in San Antonio. Planning a ranch purchase in the Texas Hill Country.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact-section" id="contact">
+            <h2 class="contact-title">Let's Connect</h2>
+            <p class="contact-subtitle">
+                Open to conversations about engineering, career transitions, or BBQ techniques.
+            </p>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/fernando-fernandez-8744786b/" class="contact-link" target="_blank">LinkedIn</a>
+                <a href="https://github.com/fernando-fernandez3" class="contact-link" target="_blank">GitHub</a>
+                <a href="https://x.com/Fdfdz90" class="contact-link" target="_blank">X</a>
+                <a href="mailto:fernando.fernandez90@outlook.com" class="contact-link">Email</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span class="footer-text">© 2024 Fernando Fernandez</span>
+            <a href="gallery.html" class="back-link">← All Designs</a>
+        </footer>
+    </div>
+</body>
+</html>

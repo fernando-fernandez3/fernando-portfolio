@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Fernandez | Scandinavian</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream: #f9f7f4;
+            --warm-white: #fefdfb;
+            --sand: #e8e4df;
+            --wood: #b8a99a;
+            --wood-dark: #8b7b6b;
+            --charcoal: #3d3d3d;
+            --moss: #7a8b72;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 32px;
+            left: 32px;
+            z-index: 100;
+            width: 48px;
+            height: 48px;
+            background: var(--warm-white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: var(--moss);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link:hover svg { stroke: var(--warm-white); }
+        .back-link svg { stroke: var(--charcoal); width: 20px; height: 20px; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 80px;
+            background: var(--warm-white);
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 24px; }
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-label {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--wood-dark);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.2s forwards;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .hero-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(40px, 7vw, 72px);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: slideUp 0.8s ease 0.4s forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--wood-dark);
+            max-width: 500px;
+            margin-bottom: 48px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: var(--charcoal);
+            color: var(--warm-white);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.8s forwards;
+        }
+
+        .hero-cta:hover {
+            background: var(--moss);
+            transform: translateY(-2px);
+        }
+
+        /* Section */
+        .section {
+            padding: 120px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .section { padding: 80px 24px; }
+        }
+
+        .section-header {
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--wood-dark);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 400;
+        }
+
+        /* Story */
+        .story-section {
+            background: var(--cream);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .story-grid { grid-template-columns: 1fr; gap: 48px; }
+        }
+
+        .story-text {
+            font-size: 17px;
+            line-height: 1.9;
+            color: var(--charcoal);
+        }
+
+        .story-text strong {
+            font-weight: 500;
+        }
+
+        .story-card {
+            background: var(--warm-white);
+            padding: 48px;
+            border-radius: 4px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .story-card-quote {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 22px;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--charcoal);
+        }
+
+        /* Journey */
+        .journey-section {
+            background: var(--warm-white);
+        }
+
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .journey-grid { grid-template-columns: 1fr; }
+        }
+
+        .journey-card {
+            background: var(--cream);
+            padding: 40px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .journey-year {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--moss);
+            margin-bottom: 12px;
+        }
+
+        .journey-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .journey-desc {
+            font-size: 15px;
+            color: var(--wood-dark);
+            line-height: 1.7;
+        }
+
+        /* Metrics */
+        .metrics-section {
+            background: var(--charcoal);
+            color: var(--warm-white);
+            padding: 100px 80px;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-section { padding: 80px 24px; }
+        }
+
+        .metrics-section .section-label { color: var(--wood); }
+        .metrics-section .section-title { color: var(--warm-white); }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+            max-width: 1000px;
+        }
+
+        @media (max-width: 900px) {
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        }
+
+        .metric-item {
+            text-align: left;
+        }
+
+        .metric-value {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: var(--wood);
+        }
+
+        /* Beyond */
+        .beyond-section {
+            background: var(--cream);
+        }
+
+        .beyond-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .beyond-grid { grid-template-columns: 1fr; }
+        }
+
+        .beyond-card {
+            background: var(--warm-white);
+            padding: 48px 32px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .beyond-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .beyond-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .beyond-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .beyond-desc {
+            font-size: 15px;
+            color: var(--wood-dark);
+            line-height: 1.6;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--warm-white);
+            padding: 120px 80px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-section { padding: 80px 24px; }
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1000px;
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .contact-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .contact-text {
+            font-size: 17px;
+            color: var(--wood-dark);
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            background: var(--cream);
+            border-radius: 4px;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--charcoal);
+            color: var(--warm-white);
+        }
+
+        .contact-link svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cream);
+            padding: 40px 80px;
+            border-top: 1px solid var(--sand);
+        }
+
+        @media (max-width: 768px) {
+            footer { padding: 40px 24px; }
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .footer-content { flex-direction: column; gap: 16px; }
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--wood-dark);
+        }
+
+        .footer-logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <a href="gallery.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </a>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-label">Staff Engineer at Tesla</p>
+            <h1 class="hero-title">Hello, I'm Fernando Fernandez</h1>
+            <p class="hero-subtitle">From automotive technician to software engineer. I build diagnostic automation systems that scale from one vehicle to millions.</p>
+            <a href="#story" class="hero-cta">Learn more about me</a>
+        </div>
+    </section>
+
+    <section id="story" class="story-section section">
+        <div class="section-header">
+            <p class="section-label">My Story</p>
+            <h2 class="section-title">From wrench to code</h2>
+        </div>
+        <div class="story-grid">
+            <div class="story-text">
+                I spent years as an automotive technician, diagnosing problems by <strong>sound and instinct</strong>. Every engine told a story.
+                <br><br>
+                I taught myself Python through YouTube tutorials after work. That curiosity led me from the shop floor to Staff Product Support Engineer at Tesla, where I now build the diagnostic automation systems that help technicians work smarter.
+            </div>
+            <div class="story-card">
+                <p class="story-card-quote">"At the technician level, your impact stays within your assigned region. At the service engineering level, you affect every vehicle."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="journey-section section">
+        <div class="section-header">
+            <p class="section-label">Experience</p>
+            <h2 class="section-title">The journey so far</h2>
+        </div>
+        <div class="journey-grid">
+            <div class="journey-card">
+                <p class="journey-year">2024 - Present</p>
+                <h3 class="journey-title">Staff Engineer</h3>
+                <p class="journey-desc">Leading diagnostic automation. 4 subsystem autodiags in production. Driving conversion from visual to Python-based diagnostics.</p>
+            </div>
+            <div class="journey-card">
+                <p class="journey-year">2020 - 2024</p>
+                <h3 class="journey-title">Senior Engineer</h3>
+                <p class="journey-desc">Discovered Autodiag. Self-taught Python through Udemy and YouTube. Traveled to service centers.</p>
+            </div>
+            <div class="journey-card">
+                <p class="journey-year">2016 - 2020</p>
+                <h3 class="journey-title">Field Specialist</h3>
+                <p class="journey-desc">Mobile service across Texas. Learned remote diagnostics and telemetry analysis.</p>
+            </div>
+            <div class="journey-card">
+                <p class="journey-year">2011 - 2016</p>
+                <h3 class="journey-title">Master Technician</h3>
+                <p class="journey-desc">All 8 ASE certifications. Electrical diagnostics specialist at Jaguar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="metrics-section">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header">
+                <p class="section-label">Impact</p>
+                <h2 class="section-title">Measured results</h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <p class="metric-value">$12.8M</p>
+                    <p class="metric-label">Documented savings</p>
+                </div>
+                <div class="metric-item">
+                    <p class="metric-value">38%</p>
+                    <p class="metric-label">Time reduction</p>
+                </div>
+                <div class="metric-item">
+                    <p class="metric-value">7,500+</p>
+                    <p class="metric-label">Automations</p>
+                </div>
+                <div class="metric-item">
+                    <p class="metric-value">84%</p>
+                    <p class="metric-label">ML accuracy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="beyond-section section">
+        <div class="section-header">
+            <p class="section-label">Life</p>
+            <h2 class="section-title">Beyond the code</h2>
+        </div>
+        <div class="beyond-grid">
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127830;</div>
+                <h3 class="beyond-title">BBQ</h3>
+                <p class="beyond-desc">2x Brisket Competition Winner. Texas traditional with mesquite. Low and slow.</p>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127939;</div>
+                <h3 class="beyond-title">Running</h3>
+                <p class="beyond-desc">First marathon: 4:29:46. Training through San Antonio greenways.</p>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">&#127793;</div>
+                <h3 class="beyond-title">Ranch</h3>
+                <p class="beyond-desc">Planning a Hill Country property. River access, legacy for generations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-grid">
+            <div>
+                <h2 class="contact-title">Let's connect</h2>
+                <p class="contact-text">Open to conversations about engineering, career transitions, or the perfect brisket.</p>
+            </div>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/fernando-fernandez-8744786b/" class="contact-link" target="_blank">
+                    LinkedIn
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/fernando-fernandez3" class="contact-link" target="_blank">
+                    GitHub
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </a>
+                <a href="mailto:fernando.fernandez90@outlook.com" class="contact-link">
+                    Email
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">Fernando Fernandez &middot; Texas &middot; 2025</p>
+            <p class="footer-logo">FF</p>
+        </div>
+    </footer>
+</body>
+</html>
